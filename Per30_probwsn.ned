@@ -17,16 +17,23 @@ package per30probwsn;
 
 import org.mixim.modules.node.WirelessNodeBattery;
 import org.mixim.modules.node.WirelessNode;
+import per30probwsn.WirelessSensor;
 
 import org.mixim.base.modules.BaseNetwork;
 
 network Per30_probwsn extends BaseNetwork
 {
     parameters:
-        int numNodes; // total number of hosts in the network
+        int numNodes = 10; // total number of hosts in the network
 
     submodules:
-        node[numNodes]: WirelessNodeBattery {}
+
+        node[numNodes]: WirelessSensor {
+
+            @display("r=10,,blue,1;p=151,109;i2=status/green");
+        }
+
     connections allowunconnected:
+    // in connectionManager, if dist(node[i], node[j]) <= maxInterfDist ==> connection between these nodes.  
     // all connections and gates are to be generated dynamically
 }
